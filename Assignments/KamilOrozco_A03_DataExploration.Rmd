@@ -30,6 +30,13 @@ This exercise accompanies the lessons in Environmental Data Analytics on Data Ex
 ```{r, echo=FALSE}
 knitr::opts_chunk$set(error = TRUE)
 ```
+
+```{r}
+library(ggplot2)
+library(tidyverse)
+```
+
+
 ## Set up your R session
 
 1.  Check your working directory, load necessary packages (tidyverse, lubridate), and upload two datasets: the ECOTOX neonicotinoid dataset (ECOTOX_Neonicotinoids_Insects_raw.csv) and the Niwot Ridge NEON dataset for litter and woody debris (NEON_NIWO_Litter_massdata_2018-08_raw.csv). Name these datasets "Neonics" and "Litter", respectively. Be sure to include the subcommand to read strings in as factors.
