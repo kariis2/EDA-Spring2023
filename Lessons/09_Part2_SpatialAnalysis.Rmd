@@ -109,6 +109,7 @@ head(counties_sf)
 
 #Plot the data, colored by area of land in each county
 mapView(counties_sf, zcol = "AWATER")
+#knit a GIS map/interactive map into html so that you dont run into problems
 ```
 
 ### 2.2.2 Read in and explore 8-digit HUC watersheds for NC
@@ -117,19 +118,21 @@ mapView(counties_sf, zcol = "AWATER")
 
 ```{r read HUCs shapefile}
 #Read the shapefile into an sf dataframe named "huc8_sf"
-
+huc8_sf <- st_read('./Data/Spatial/NCHUC8.shp') 
 
 #Reveal the columns
-
+colnames(huc8_sf)
 
 #Check the CRS
-
+st_crs(huc8_sf)
 
 #Examine some records
 head(huc8_sf)
 
 #View the data as a map, colored by the acreage in each
-
+ggplot() +
+  geom_sf(data = huc8_sf, aes(fill=ACRES)) +
+  scale_fill_distiller()
 
 
 
@@ -141,12 +144,17 @@ head(huc8_sf)
 
 ```{r Select the Upper Neuse HUC 8}
 #Read the shapefile into an sf dataframe
-
+UPNE <- st_read('./Data/Spatial/NCHUC8.shp') %>%
+  filter(SUBBASIN == "Upper Neuse")
 
 
 #Create a map
 
+ggplot() +
+  geom_sf(data=huc8_sf, fill= 'purple', color = 'gray') +
+  geom_sf(data=neuse_sf, fill= 'orange', color = 'black') +
 
+  mapview(huc8_sf, col.regions='orange', alpha=1)
 
 
 ```
